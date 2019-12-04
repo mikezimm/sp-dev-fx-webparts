@@ -17,6 +17,10 @@ import {
   PropertyPaneToggle, PropertyPaneSlider
 } from "@microsoft/sp-property-pane";
 
+import { corpPropsMapping } from './colors/CorpPropsMapping';
+import { availablePropsMapping } from './colors/AvailablePropsMapping';
+
+
 export default class SpSecurityWebPart extends BaseClientSideWebPart<ISpSecurityWebPartProps> {
   public onInit(): Promise<void> {
     return super.onInit().then(_ => {
@@ -84,7 +88,13 @@ export default class SpSecurityWebPart extends BaseClientSideWebPart<ISpSecurity
         break;
     }
   };
+
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
+
+    let theColorChoices : IPropertyPaneDropdownOption[] = corpPropsMapping.listChoices;
+
+    debugger;
+    //console.log('getPropertyPaneConfiguration: theColorChoices', theColorChoices);
     return {
       pages: [
         {
@@ -100,6 +110,12 @@ export default class SpSecurityWebPart extends BaseClientSideWebPart<ISpSecurity
                   label: "Permission Type",
                   options: this.getPermissionTypes()
                 }),
+
+                PropertyPaneDropdown("propScheme", {
+                  label: "Color Scheme",
+                  options: theColorChoices,
+                }),
+
                 PropertyFieldSelectedPermissions("SelectedPermissions", {
                   label: "Selected Permissions and Colors", 
                   onPropertyChange: this.onPropertyChange.bind(this),
@@ -109,6 +125,7 @@ export default class SpSecurityWebPart extends BaseClientSideWebPart<ISpSecurity
 
                   },
                 }),
+
                 PropertyPaneCheckbox("letUserSelectPermission", {
                   text: "Let user select Permission"
                 }),
@@ -198,5 +215,38 @@ export default class SpSecurityWebPart extends BaseClientSideWebPart<ISpSecurity
         }
       ]
     };
+  }
+
+  protected onPropertyPaneFieldChanged(propertyPath: string, oldValue: any, newValue: any): void {
+
+    if (propertyPath === 'propScheme' && newValue !== oldValue) {
+
+      let newMap : any = {};
+
+      newMap = availablePropsMapping.getProperties(newValue);
+
+      console.log('onPropSchemeChange: newMap ' + propertyPath, newMap);
+
+      const hasValues = Object.keys(newMap).length;
+
+      if (hasValues !== 0) {
+        const allKeys = Object.keys(newMap);
+
+        for (let key of allKeys){
+          this.properties[key] = newMap[key];
+        }
+
+        this.context.propertyPane.refresh();
+
+        
+      } else {
+        console.log('Did NOT List Defintion... updating column name props');
+
+      }
+      console.log('onPropertyPaneFieldChanged:  props',this.properties);
+      return;
+
+    }
+
   }
 }

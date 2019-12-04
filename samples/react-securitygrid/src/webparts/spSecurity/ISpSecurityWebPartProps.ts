@@ -4,6 +4,8 @@ import { IColor } from "office-ui-fabric-react/lib/Color";
 export interface ISelectedPermission {
   permission: string;
   color: IColor;
+  friendlyLabel?: string;
+  shape?: string;
 }
 
 
@@ -23,5 +25,6 @@ export interface ISpSecurityWebPartProps {
   showSecurityGroups: boolean; // show PrincipalType=4
   showUsers: boolean; // show PrincipalType=1
 
+  propScheme: string; // select property scheme - intially for colored permissions
 
 }
