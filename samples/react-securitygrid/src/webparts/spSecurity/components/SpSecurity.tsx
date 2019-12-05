@@ -50,8 +50,16 @@ export default class SpSecurity extends React.Component<ISpSecurityProps, ISpSec
     this.parentIsExpanded = this.parentIsExpanded.bind(this);
     this.renderUserSelected = this.renderUserSelected.bind(this);
   }
-  public componentDidUpdate(): void {
+  public componentDidUpdate(prevProps): void {
     // disable postback of buttons. see https://github.com/SharePoint/sp-dev-docs/issues/492
+
+    // Added to refresh webpart when the color scheme choice is changed.
+    let rebuildColors = false;
+    if (this.props.selectedPermissions !== prevProps.selectedPermissions) {  rebuildColors = true ; }
+    if (rebuildColors === true) {
+      this._updateStateOnPropsChange({});
+    }
+
     if (Environment.type === EnvironmentType.ClassicSharePoint) {
       const buttons: NodeListOf<HTMLButtonElement> = this.props.domElement.getElementsByTagName('button');
       for (let i: number = 0; i < buttons.length; i++) {
@@ -64,6 +72,16 @@ export default class SpSecurity extends React.Component<ISpSecurityProps, ISpSec
       }
     }
   }
+
+  private _updateStateOnPropsChange(params: any ): void {
+
+    this.setState({
+      selectedPermissions: this.props.selectedPermissions
+    });
+    
+  }
+
+
   public componentWillMount(): void {
 
     this.svc.loadData(this.props.showHiddenLists, this.props.showCatalogs, this.props.aadHttpClient, false).then((response) => {
