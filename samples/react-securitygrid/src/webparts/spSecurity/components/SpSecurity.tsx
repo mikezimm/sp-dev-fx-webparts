@@ -78,7 +78,7 @@ export default class SpSecurity extends React.Component<ISpSecurityProps, ISpSec
     this.setState({
       selectedPermissions: this.props.selectedPermissions
     });
-    
+
   }
 
 
@@ -291,18 +291,21 @@ export default class SpSecurity extends React.Component<ISpSecurityProps, ISpSec
   //     </div>
   //   );
   // }
+  
   public renderUserItem(item?: any, index?: number, column?: IColumn): any {
   
     let user: SPSiteUser = find(this.state.securityInfo.siteUsers, (su) => {
       return su.id.toString() === column.key;
     });
     // spin througg the selected permsiisopns and for the first hit, display that color. No Hit, then display empty
-    
+    console.log('renderUserItem: this.state.selectedPermissions', this.state.selectedPermissions);
     for (let selectedPermission of this.state.selectedPermissions?this.state.selectedPermissions:[]) {
+      let useIcon = (selectedPermission.icon ? selectedPermission.icon : "CircleFill");
+      let useFontSize = (selectedPermission.fontSize ? selectedPermission.fontSize : 18);
       if (Helpers.doesUserHavePermission(item, user, SPPermission[selectedPermission.permission],
         this.state.securityInfo.roleDefinitions, this.state.securityInfo.siteGroups)) {
         return (
-          <Icon iconName="CircleFill"  style={{color:selectedPermission.color.str}}  onClick={(e) => {
+          <Icon iconName={useIcon}  style={{color:selectedPermission.color.str, fontSize: useFontSize}}  onClick={(e) => {
             this.expandCollapseList(item);
           }} />
         );

@@ -17,47 +17,54 @@
             propsMap = {
                 "friendlyLabel" : 'Full Control',
                 "permission" : 'manageWeb',
-                "shape" : 'star',
+                "icon" : 'FavoriteStarFill',
                 "color" : availableColorPropsMapping.getColors('red'),
+                "fontSize": null,
             };
 
         } else if (findMe === 'Contribute') {
             propsMap = {
                 "friendlyLabel" : 'Contribute',
                 "permission" : 'deleteListItems',
-                "shape" : 'square',
+                "icon" : 'EditSolid12',
                 "color" : availableColorPropsMapping.getColors('yellow'),
+                "fontSize": null,
             };
             
         } else if (findMe === 'Read') {
             propsMap = {
                 "friendlyLabel" : 'Read',
                 "permission" : 'viewListItems',
-                "shape" : 'triangle',
+                "icon" : 'RedEye',
                 "color" : availableColorPropsMapping.getColors('green'),
+                "fontSize": 24,
              };
             
         } else if (findMe === 'Edit') {
             propsMap = {
                 "friendlyLabel" : 'Edit',
                 "permission" : 'manageLists',
-                "shape" : 'star',
+                "icon" : 'TriangleSolid',
                 "color" : availableColorPropsMapping.getColors('blue'),
+                "fontSize": null,
             };
             
         } else if (findMe === 'Design') {
             propsMap = {
                 "friendlyLabel" : 'Design',
                 "permission" : 'addAndCustomizePages',
-                "shape" : 'star',
+                "icon" : 'Design',
                 "color" : availableColorPropsMapping.getColors('pink'),
+                "fontSize": null,
             };
             
         } else if (findMe === 'Approve') {
             propsMap = {
                 "friendlyLabel" : 'Approve',
                 "permission" : 'approveItems',
+                "icon" : 'LockSolid',
                 "color" : availableColorPropsMapping.getColors('purple'),
+                "fontSize": null,
              };
             
         }

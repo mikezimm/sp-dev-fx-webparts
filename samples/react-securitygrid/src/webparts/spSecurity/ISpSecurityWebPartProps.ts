@@ -5,7 +5,8 @@ export interface ISelectedPermission {
   permission: string;
   color: IColor;
   friendlyLabel?: string;
-  shape?: string;
+  icon?: string;
+  fontSize?: number;
 }
 
 
