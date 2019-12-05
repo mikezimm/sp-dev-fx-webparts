@@ -15,16 +15,16 @@
         {   index: 0,   key: 'Custom', text: "Custom"  };
 
     public fullContRead: IPropertyPaneDropdownOption = <IPropertyPaneDropdownOption>
-        {   index: 0,   key: 'FullContRead', text: "2010 defaults"  };
+        {   index: 0,   key: 'FullContRead', text: "2010 defaults - Full, Contr, Read"  };
 
     public fullEditContRead: IPropertyPaneDropdownOption = <IPropertyPaneDropdownOption>
-        {   index: 1,   key: 'FullEditContRead', text: "2013 defaults"  };
+        {   index: 1,   key: 'FullEditContRead', text: "2013 defaults - Full, Edit, Contr, Read"  };
 
     public approvalSite: IPropertyPaneDropdownOption = <IPropertyPaneDropdownOption>
-        {   index: 1,   key: 'ApprovalSite', text: "ApprovalSite"  };
+        {   index: 1,   key: 'ApprovalSite', text: "Approval Site - 2013 + Approval"  };
         
-    public placeHolder2: IPropertyPaneDropdownOption = <IPropertyPaneDropdownOption>
-        {   index: 1,   key: 'PlaceHolder2', text: "PlaceHolder2"  };
+    public defaultLevels: IPropertyPaneDropdownOption = <IPropertyPaneDropdownOption>
+        {   index: 1,   key: 'DefaultLevels', text: "Default levels - Approval + Design"  };
 
     public getProperties (findMe) :any {
         let propsMap = {};
@@ -45,8 +45,8 @@
             propsMap = {
                 "selectedPermissions" : [
                     availablePermissionsMapping.getPermissionLevel('FullControl'),
-                    availablePermissionsMapping.getPermissionLevel('Contribute'),
                     availablePermissionsMapping.getPermissionLevel('Edit'),
+                    availablePermissionsMapping.getPermissionLevel('Contribute'),
                     availablePermissionsMapping.getPermissionLevel('Read'),
                 ]
             };
@@ -55,17 +55,24 @@
             propsMap = {
                 "selectedPermissions" : [
                     availablePermissionsMapping.getPermissionLevel('FullControl'),
-                    availablePermissionsMapping.getPermissionLevel('Approve'),
                     availablePermissionsMapping.getPermissionLevel('Edit'),
+                    availablePermissionsMapping.getPermissionLevel('Approve'),
                     availablePermissionsMapping.getPermissionLevel('Contribute'),
                     availablePermissionsMapping.getPermissionLevel('Read'),
                 ]
              };
             
-        } else if (findMe === 'PlaceHolder2') {
+        } else if (findMe === 'DefaultLevels') {
             propsMap = {
- 
-            };
+                "selectedPermissions" : [
+                    availablePermissionsMapping.getPermissionLevel('FullControl'),
+                    availablePermissionsMapping.getPermissionLevel('Design'),
+                    availablePermissionsMapping.getPermissionLevel('Edit'),
+                    availablePermissionsMapping.getPermissionLevel('Approve'),
+                    availablePermissionsMapping.getPermissionLevel('Contribute'),
+                    availablePermissionsMapping.getPermissionLevel('Read'),
+                ]
+             };
             
         }
 

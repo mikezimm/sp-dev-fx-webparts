@@ -19,6 +19,7 @@
         availablePropsMapping.fullContRead,
         availablePropsMapping.fullEditContRead,
         availablePropsMapping.approvalSite,
+        availablePropsMapping.defaultLevels,
 
     ];
   }

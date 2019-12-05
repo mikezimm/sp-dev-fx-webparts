@@ -42,12 +42,15 @@
                 "friendlyLabel" : 'Edit',
                 "permission" : 'manageLists',
                 "shape" : 'star',
-                "color" : availableColorPropsMapping.getColors('red'),
+                "color" : availableColorPropsMapping.getColors('blue'),
             };
             
         } else if (findMe === 'Design') {
             propsMap = {
- 
+                "friendlyLabel" : 'Design',
+                "permission" : 'addAndCustomizePages',
+                "shape" : 'star',
+                "color" : availableColorPropsMapping.getColors('pink'),
             };
             
         } else if (findMe === 'Approve') {

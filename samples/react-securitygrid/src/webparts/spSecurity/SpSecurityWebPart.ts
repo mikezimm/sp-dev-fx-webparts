@@ -245,8 +245,7 @@ export default class SpSecurityWebPart extends BaseClientSideWebPart<ISpSecurity
       }
       console.log('onPropertyPaneFieldChanged:  props',this.properties);
       return;
-
     }
-
+    console.log('onPropertyPaneFieldChanged:  props',this.properties);
   }
 }
