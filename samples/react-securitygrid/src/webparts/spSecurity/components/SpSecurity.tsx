@@ -26,6 +26,8 @@ export default class SpSecurity extends React.Component<ISpSecurityProps, ISpSec
   private userSelection = new Selection();
   private listSelection = new Selection();
   private validBrandIcons = " accdb csv docx dotx mpp mpt odp ods odt one onepkg onetoc potx ppsx pptx pub vsdx vssx vstx xls xlsx xltx xsn ";
+  private defIconSize = 18;
+  private defIconName = 'StatusCircleBlock2'; //'LocationCircle'
   constructor(props: any) {
     super(props);
     this.state = {
@@ -291,9 +293,9 @@ export default class SpSecurity extends React.Component<ISpSecurityProps, ISpSec
   //     </div>
   //   );
   // }
-  
+
   public renderUserItem(item?: any, index?: number, column?: IColumn): any {
-  
+    
     let user: SPSiteUser = find(this.state.securityInfo.siteUsers, (su) => {
       return su.id.toString() === column.key;
     });
@@ -301,7 +303,7 @@ export default class SpSecurity extends React.Component<ISpSecurityProps, ISpSec
     console.log('renderUserItem: this.state.selectedPermissions', this.state.selectedPermissions);
     for (let selectedPermission of this.state.selectedPermissions?this.state.selectedPermissions:[]) {
       let useIcon = (selectedPermission.icon ? selectedPermission.icon : "CircleFill");
-      let useFontSize = (selectedPermission.fontSize ? selectedPermission.fontSize : 18);
+      let useFontSize = (selectedPermission.fontSize ? selectedPermission.fontSize : this.defIconSize);
       if (Helpers.doesUserHavePermission(item, user, SPPermission[selectedPermission.permission],
         this.state.securityInfo.roleDefinitions, this.state.securityInfo.siteGroups)) {
         return (
@@ -313,7 +315,7 @@ export default class SpSecurity extends React.Component<ISpSecurityProps, ISpSec
     }
     // no hits
     return (
-      <Icon iconName="LocationCircle" onClick={(e) => {
+      <Icon iconName={ this.defIconName } style={{fontSize: this.defIconSize}} onClick={(e) => {
         this.expandCollapseList(item);
       }} />
     );
